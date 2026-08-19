@@ -1,37 +1,29 @@
 #include <iostream>
 #include <vector>
+#include <stdexcept>
+#include <iostream>
+#include <vector>
 #include "easyfind.hpp"
 
 int main()
 {
-    std::vector<int> numbers;
+    std::vector<int> v;
 
-    numbers.push_back(10);
-    numbers.push_back(20);
-    numbers.push_back(30);
-    numbers.push_back(40);
-    numbers.push_back(50);
-
-    try
-    {
-        std::vector<int>::iterator it = easyfind(numbers, 30);
-
-        std::cout << "Found: " << *it << std::endl;
-    }
-    catch (std::exception &e)
-    {
-        std::cout << "Not found" << std::endl;
-    }
+    v.push_back(5);
+    v.push_back(10);
+    v.push_back(0);
+    v.push_back(42);
 
     try
     {
-        std::vector<int>::iterator it = easyfind(numbers, 99);
-
-        std::cout << "Found: " << *it << std::endl;
+        std::cout << *easyfind(v, 10) << "\n";
+        std::cout << *easyfind(v, 0) << "\n";
+        std::cout << *easyfind(v, 42) << "\n";
+        std::cout << *easyfind(v, 11) << "\n";
     }
     catch (std::exception &e)
     {
-        std::cout << "Not found" << std::endl;
+        std::cout << "Element not found" << "\n";
     }
 
     return 0;

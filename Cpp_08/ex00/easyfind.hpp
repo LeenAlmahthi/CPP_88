@@ -2,19 +2,18 @@
 #ifndef EASYFIND_HPP
 #define EASYFIND_HPP
 
+#include <algorithm>
+#include <exception>
+
 template <typename T>
-typename T::iterator easyfind(T &y,int x)
+typename T::iterator easyfind(T &y, int x)
 {
-    typename T::iterator it = y.begin(); 
-    if (y.size() == 0)
-          throw std::exception();
-    for (unsigned int i = 0; i < y.size(); i++)
-    {
-        if (y[i] == x)
-            return (it);
-        it++;
-    }
-    throw std::exception();
+    typename T::iterator it = std::find(y.begin(), y.end(), x);
+
+    if (it == y.end())
+        throw std::exception();
+
+    return it;
 }
 
 #endif
