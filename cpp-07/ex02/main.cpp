@@ -89,9 +89,9 @@ int main()
         std::cout << strings[i] << std::endl;
 
 
-    // std::cout << "\n===== Self assignment =====" << std::endl;
+    std::cout << "\n===== Self assignment =====" << std::endl;
 
-    // numbers = numbers;
+    numbers = numbers;
 
     std::cout << "numbers[0]: " << numbers[0] << std::endl;
     std::cout << "numbers size: " << numbers.size() << std::endl;

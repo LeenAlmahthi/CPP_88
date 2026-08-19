@@ -2,26 +2,92 @@
 #define ARRAY_HPP
 
 #include <exception>
-#include "Array.tpp"
-
 template <typename T>
 class Array
 {
-private:
-    T*              _array;
-    unsigned int    _size;
+    private:
+        T*              _array;
+        unsigned int    _size;
 
-public:
-    Array();
-    Array(unsigned int n);
-    Array(const Array& other);
-    ~Array();
+    public:
+    Array()
+    {
+        _array = NULL;
+        _size = 0;
+    }
 
-    Array& operator=(const Array& other);
+    Array(unsigned int i)
+    {
+        _size = i;
+        _array = NULL;
 
-    T& operator[](unsigned int index);
-    const T& operator[](unsigned int index) const;
+        if (i > 0)
+            _array = new T[i]();
+    }
 
-    unsigned int size() const;
+    Array(const Array& tmp)
+    {
+        _size = 0;
+        _array = NULL;
+        *this = tmp;
+        // _size = tmp._size;
+        // _array = NULL;
+
+        // if (_size > 0)
+        // {
+        //     _array = new T[_size];
+
+        //     for (unsigned int i = 0; i < _size; i++)
+        //         _array[i] = tmp._array[i];
+        // }
+    }
+
+    ~Array()
+    {
+        delete[] _array;
+    }
+
+    Array& operator=(const Array& tmp)
+    {
+        if (this != &tmp)
+        {
+            delete[] _array;
+
+            _size = tmp._size;
+            _array = NULL;
+
+            if (_size > 0)
+            {
+                _array = new T[_size];
+
+                for (unsigned int i = 0; i < _size; i++)
+                    _array[i] = tmp._array[i];
+            }
+        }
+
+        return *this;
+    }
+
+    T& operator[](unsigned int i)
+    {
+        if (i >= _size)
+            throw std::exception();
+
+        return _array[i];
+    }
+
+    const T& operator[](unsigned int i) const
+    {
+        if (i >= _size)
+            throw std::exception();
+
+        return _array[i];
+    }
+
+    unsigned int size() const
+    {
+        return _size;
+    }
 };
+
 #endif
